@@ -1,5 +1,5 @@
 # Baixe o arquivo ZIP mais recente do OWASP ZAP
-wget -O zap.zip $(wget -q -O - https://api.github.com/repos/zaproxy/zaproxy/releases/latest | jq -r '.assets[].browser_download_url' | grep -E 'ZAP_WEEKLY_D.*\.zip')
+curl -L $(curl -s https://api.github.com/repos/zaproxy/zaproxy/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep -E 'ZAP_WEEKLY_D.*\.zip') -o zap.zip
 
 # Extraia o arquivo ZIP para /usr/share
 sudo unzip -d /usr/share zap.zip
